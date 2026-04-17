@@ -20,4 +20,4 @@ module.exports = connectDB;
 
 -> this function is async function that will try top connect the data base uisng the connect method of mongoose and pass the the connection string that stored in the enve file
 
--> try catch block is used to catch an errorif the connection is failed and log error
+-> try catch block is used to catch an errorif the connection is failed and log error*/

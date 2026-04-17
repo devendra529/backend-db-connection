@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Form</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 300px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: #4facfe;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #4facfe;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #00c6ff;
+    }
+
+    #message {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Add User</h2>
+     // form to add user details
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="email" id="email" placeholder="Enter Email">
+
+    <button onclick="addUser()">Submit</button>
+
+    <p id="message"></p>
+  </div>
+
+  <script>
+    async function addUser() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      
+      //basic validaytion and using try catch block to handle error
+      try {
+        const res = await fetch("http://localhost:5000/api/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ name, email })
+        });
+
+        const data = await res.json();
+
+        alert(" User Added Successfully!");
+        document.getElementById("message").innerText = "User Added!";
+        
+        console.log(data);
+
+      } catch (error) {
+        console.error(error);
+        alert("Error adding user");
+      }
+    }
+  </script>
+
+</body>
+</html>
